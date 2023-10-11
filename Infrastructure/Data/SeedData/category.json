@@ -1,0 +1,18 @@
+[
+    {
+      "Id": 1,
+      "Name": "Barbershop"
+    },
+    {
+      "Id": 2,
+      "Name": "Beauty Salon"
+    },
+    {
+      "Id": 3,
+      "Name": "Dentist"
+    },
+    {
+      "Id": 4,
+      "Name": "Nail Center"
+    }
+  ]

@@ -25,5 +25,21 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+using var scoped = app.Services.CreateScope();
+var services = scoped.ServiceProvider;
+var context = services.GetRequiredService<AppointmentContext>();
+
+var logger = services.GetRequiredService<ILogger<Program>>();
+try
+{
+    await context.Database.MigrateAsync();
+    await AppointmentContextSeed.SeedAsync(context);
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "An error occured during migration");
+}
+
+
 
 app.Run();

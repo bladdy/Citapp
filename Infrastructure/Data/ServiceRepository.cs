@@ -19,7 +19,7 @@ namespace Infrastructure.Data
         }
         public async  Task<IReadOnlyList<Service>> GetServiceAsync()
         {
-            return await _context.Services.ToListAsync();
+            return await _context.Services.Include(c=> c.Category).ToListAsync();
         }
     }
 
