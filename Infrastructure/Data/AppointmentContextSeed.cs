@@ -42,6 +42,7 @@ namespace Infrastructure.Data
             {
                 //var logger = loggerFactory.CreateLogger<AppointmentContext>();
                 //logger.LogError(ex.Message);
+                var e = ex;
                 throw;
             }
         }
