@@ -10,8 +10,5 @@ namespace Core.Interfaces
         Task<IReadOnlyList<Service>> GetServicesByCategoryAsync(int id);
         Task<Category> GetCategoriesByIdAsync (int id);
         Task<IReadOnlyList<Category>> GetCategoriesAsync();
-
-        
-
     }
 }

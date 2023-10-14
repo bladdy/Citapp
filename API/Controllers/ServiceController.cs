@@ -3,6 +3,8 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
+using Core.Specifications;
+using API.Dtos;
 
 namespace API.Controllers
 {
@@ -10,39 +12,56 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ServiceController : ControllerBase
     {
-        private readonly IServiceRepository _repository;
+        private readonly IGenericRepository<Service> _serviceRepo;
+        private readonly IGenericRepository<Category> _categoryRepo;
 
-        public ServiceController( IServiceRepository repository)
+        public ServiceController( IGenericRepository<Service> ServiceRepo, IGenericRepository<Category> CategoryRepo)
         {
-            _repository = repository;
+            _categoryRepo = CategoryRepo;
+            _serviceRepo = ServiceRepo;
         }
-         [HttpGet("GetServices")]
+        [HttpGet("GetServices")]
         public  async Task<ActionResult<List<Service>>> GetServices()
         {
-            var service = await _repository.GetServiceAsync();
+            var spec = new ServicesWithCategoriesSpecification();
+            var service = await _serviceRepo.ListAsync(spec);
             return  Ok(service);
         }
         [HttpGet("GetServices/{id}")]
-        public async Task<ActionResult<Service>> GetServices(int id)
+        public async Task<ActionResult<ServiceToReturnDto>> GetServices(int id)
         {
-            return  await _repository.GetServiceByIdAsync(id);
+            var spec = new ServicesWithCategoriesSpecification(id);
+            var service = await _serviceRepo.GetEntityWithSpec(spec);
+            return new ServiceToReturnDto
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                Price = service.Price,
+                PictureUrl = service.PictureUrl,
+                Category = service.Category.Name
+                
+
+            };
         }
+        //https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18137196#overview
         [HttpGet("GetServicesByCategory/{id}")]
         public async Task<ActionResult<List<Service>>> GetServicesByCategory(int id)
         {
-            List<Service> services = (List<Service>)await _repository.GetServicesByCategoryAsync(id);
-            return services;
+            var spec = new ServicesWithCategoriesSpecification(id, string.Empty);
+            var services = await _serviceRepo.ListAsync(spec);
+            return Ok(services);
         }
         [HttpGet("GetCategories")]
         public  async Task<ActionResult<List<Category>>> GetCategories()
         {
-            var categories = await _repository.GetCategoriesAsync();
+            var categories = await _categoryRepo.ListAllAsync();
             return  Ok(categories);
         }
         [HttpGet("GetCategories/{id}")]
         public async Task<ActionResult<Category>> GetCategories(int id)
         {
-            return  await _repository.GetCategoriesByIdAsync(id);
+            return  await _categoryRepo.GetByIdAsync(id);
         }
     }
 
