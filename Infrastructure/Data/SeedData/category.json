@@ -1,18 +1,22 @@
 [
     {
       "Id": 1,
-      "Name": "Barbershop"
+      "Name": "Barbershop",
+      "IconUrl":"icons/barber.png"
     },
     {
       "Id": 2,
-      "Name": "Beauty Salon"
+      "Name": "Beauty Salon",
+      "IconUrl":"icons/beauty_salon.png"
     },
     {
       "Id": 3,
-      "Name": "Dentist"
+      "Name": "Dentist",
+      "IconUrl":"icons/dentist.png"
     },
     {
       "Id": 4,
-      "Name": "Nail Center"
+      "Name": "Nail Center",
+      "IconUrl":"icons/nail_center.png"
     }
   ]
