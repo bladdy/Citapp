@@ -1,4 +1,3 @@
-using API.Errors;
 using API.Extensions;
 using API.Middleware;
 using Infrastructure.Data;
@@ -21,6 +20,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseStaticFiles();
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
@@ -40,7 +40,5 @@ catch (Exception ex)
 {
     logger.LogError(ex, "An error occured during migration");
 }
-
-
 
 app.Run();
