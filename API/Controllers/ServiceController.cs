@@ -6,12 +6,11 @@ using Core.Interfaces;
 using Core.Specifications;
 using API.Dtos;
 using AutoMapper;
+using API.Errors;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ServiceController : ControllerBase
+    public class ServiceController : BaseApiController
     {
         private readonly IGenericRepository<Service> _serviceRepo;
         private readonly IGenericRepository<Category> _categoryRepo;
@@ -31,10 +30,13 @@ namespace API.Controllers
             return  Ok(_mapper.Map<IReadOnlyList<Service>, IReadOnlyList<ServiceToReturnDto>>(service));
         }
         [HttpGet("GetServices/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ServiceToReturnDto>> GetServices(int id)
         {
             var spec = new ServicesWithCategoriesSpecification(id);
             var service = await _serviceRepo.GetEntityWithSpec(spec);
+            if(service == null) return NotFound(new ApiResponse(404));
             return _mapper.Map<Service, ServiceToReturnDto>(service);
         }
         //https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18137196#overview
