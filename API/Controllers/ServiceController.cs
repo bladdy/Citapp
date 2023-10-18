@@ -7,6 +7,7 @@ using Core.Specifications;
 using API.Dtos;
 using AutoMapper;
 using API.Errors;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -23,11 +24,16 @@ namespace API.Controllers
             _serviceRepo = ServiceRepo;
         }
         [HttpGet("GetServices")]
-        public  async Task<ActionResult<IReadOnlyList<Service>>> GetServices()
+        public  async Task<ActionResult<Pagination<ServiceToReturnDto>>> GetServices( [FromQuery]ServiceSpecParams serviceParams )
         {
-            var spec = new ServicesWithCategoriesSpecification();
+            var spec = new ServicesWithCategoriesSpecification(serviceParams);
             var service = await _serviceRepo.ListAsync(spec);
-            return  Ok(_mapper.Map<IReadOnlyList<Service>, IReadOnlyList<ServiceToReturnDto>>(service));
+
+            var countSpec = new ServicesWithFiltersForCountSpecification(serviceParams);
+            var totalItems = await _serviceRepo.CountAsync(countSpec);
+
+            var data = _mapper.Map<IReadOnlyList<Service>, IReadOnlyList<ServiceToReturnDto>>(service);
+            return Ok( new Pagination<ServiceToReturnDto>(serviceParams.PageIndex, serviceParams.PageSize, totalItems, data));
         }
         [HttpGet("GetServices/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
