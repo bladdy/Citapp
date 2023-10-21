@@ -24,7 +24,7 @@ app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
-
+//https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18137332?start=15#overview
 app.MapControllers();
 using var scoped = app.Services.CreateScope();
 var services = scoped.ServiceProvider;
