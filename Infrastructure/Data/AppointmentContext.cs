@@ -6,7 +6,7 @@ namespace Infrastructure.Data
 {
     public class AppointmentContext : DbContext
     {
-        public AppointmentContext(DbContextOptions options) : base(options)
+        public AppointmentContext(DbContextOptions<AppointmentContext> options) : base(options)
         {
         }
         public DbSet<Service> Services { get; set; }
