@@ -21,6 +21,9 @@ export class ShopService {
 
     return this.http.get<Pagination<Service[]>>(this.baseUrl + 'Service/GetServices',{params});
   }
+  getService(id : number){
+    return this.http.get<Service>(this.baseUrl + 'Service/GetServices/' + id);
+  }
   getCategory(){
     return this.http.get<Category[]>(this.baseUrl + 'Service/GetCategories/');
   }
