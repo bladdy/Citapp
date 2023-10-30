@@ -5,6 +5,8 @@ import { PagingHearderComponent } from './paging-hearder/paging-hearder.componen
 import { PagerComponent } from './pager/pager.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 
 
 
@@ -17,6 +19,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
+    CarouselModule.forRoot(),
     ReactiveFormsModule,
     BsDropdownModule.forRoot()
 
@@ -26,7 +29,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     PagingHearderComponent,
     PagerComponent,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    CarouselModule
   ]
 })
 export class SharedModule { }
