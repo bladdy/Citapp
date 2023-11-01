@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, map, of } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
 import { Address, User } from '../shared/models/user.interface';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -15,10 +14,10 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) { }
 
   loadCurrentUser(token: string | null) {
-    /*if (token == null) {
+    if (token == null) {
       this.currentUserSource.next(null);
       return of(null);
-    }*/
+    }
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
