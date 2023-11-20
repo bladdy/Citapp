@@ -1,8 +1,8 @@
-using System.IO;
 using System.Text.Json;
 using Core.Entities;
-using Core.Entities.Identity;
-using Microsoft.Extensions.Logging;
+using Core.Entities.Company;
+using System.Linq;
+using Infrastructure.Identity;
 
 namespace Infrastructure.Data
 {
@@ -12,6 +12,7 @@ namespace Infrastructure.Data
         {
             try
             {
+                
                 if (!context.Plans.Any())
                 {                    
                     var plansData = File.ReadAllText("../Infrastructure/Data/SeedData/plans.json");
@@ -47,6 +48,78 @@ namespace Infrastructure.Data
                     {
                         context.Services.Add(item);
                     }
+
+                    await context.SaveChangesAsync();
+                    
+                }
+                if (!context.Establishments.Any())
+                {                    
+                    
+                    var establichment = new Establishment(){
+                        Name = "Papolo Peluqueria",
+                        PhoneNumber= "789999999",
+                        Plan = context.Plans.FirstOrDefault(),
+                        Phone = new List<Phone>(){
+                            new () {
+                                Type = "Movil",
+                                NumberPhone = "80965125411",
+                            }
+                        }
+                        ,
+                        Schedule = new List<Schedule>(){
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(17, 00, 00),
+                                WeekDay = DayOfWeek.Monday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(17, 00, 00),
+                                WeekDay = DayOfWeek.Tuesday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(17, 00, 00),
+                                WeekDay = DayOfWeek.Wednesday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(17, 00, 00),
+                                WeekDay = DayOfWeek.Thursday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(17, 00, 00),
+                                WeekDay = DayOfWeek.Friday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(13, 00, 00),
+                                WeekDay = DayOfWeek.Saturday                  
+                            },
+                            new() {
+                                TimeStart = new TimeSpan(8, 00, 00),
+                                TimeEnd = new TimeSpan(13, 00, 00),
+                                WeekDay = DayOfWeek.Sunday                  
+                            }
+                        },
+                        EstablichmentAddresses = new EstablichmentAddress(),
+                        EstablishmentServices = new List<EstablishmentService>()
+                        {
+                            new() {
+                                Service = context.Services.FirstOrDefault(),
+                            },
+                            new() {
+                                Service = (Service)context.Services.First(x=> x.Id ==2)
+                            },
+                            new() {
+                                Service = (Service)context.Services.First(x=> x.Id ==3)
+                            }
+
+                        },
+                        Category = context.Categories.FirstOrDefault()
+                    };
+                    context.Establishments.Add(establichment);
 
                     await context.SaveChangesAsync();
                     

@@ -41,7 +41,8 @@ namespace API.Controllers
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName,
-                UserType = user.UserType.ToString()
+                UserType = user.UserType.ToString(),
+                EstablishmentId = user.EstablishmentId
             };
         }
         [HttpGet("emailexists")]
@@ -84,7 +85,8 @@ namespace API.Controllers
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName,
-                UserType = user.UserType.ToString()
+                UserType = user.UserType.ToString(),
+                EstablishmentId = user.EstablishmentId
             };
         }
         [HttpPost("register")]
@@ -112,7 +114,8 @@ namespace API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Token = _tokenService.CreateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                UserType = user.UserType.ToString()
             };
         }
         [HttpGet("role")]

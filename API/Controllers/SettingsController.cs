@@ -1,4 +1,4 @@
-using Core.Entities.Identity;
+using Core.Entities.Company;
 using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;

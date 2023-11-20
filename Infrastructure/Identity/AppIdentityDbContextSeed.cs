@@ -24,7 +24,8 @@ namespace Infrastructure.Identity
                         Zipcode = "90210",
                         Country = "United State of America"
                     },
-                    UserType = Core.Enums.UserType.SuperUser
+                    UserType = Core.Enums.UserType.SuperUser,
+                    EstablishmentId = 1
                     
                 };
 

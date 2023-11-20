@@ -11,8 +11,6 @@ export class PricingComponent implements OnInit{
 
   plans: Plan[] = [];
   constructor(private pricingService: PricingService) {
-
-
   }
   ngOnInit(): void {
     this.getPricings();
@@ -24,7 +22,5 @@ export class PricingComponent implements OnInit{
       },
       error: error => console.log(error)
     });
-
   }
-
 }

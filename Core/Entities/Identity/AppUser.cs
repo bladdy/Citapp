@@ -1,3 +1,4 @@
+using Core.Entities.Company;
 using Core.Enums;
 using Microsoft.AspNetCore.Identity;
 
@@ -12,6 +13,6 @@ namespace Core.Entities.Identity
         //quitarle el usertype por un listado de roles
         //public IReadOnlyList<UserRole> UserRoles { get; set; }
         //agregarle la compañia al usuario
-        //public Company Company { get; set; }
+        public int EstablishmentId { get; set; }
     }
 }

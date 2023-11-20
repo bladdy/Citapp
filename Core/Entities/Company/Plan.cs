@@ -1,4 +1,4 @@
-namespace Core.Entities.Identity
+namespace Core.Entities.Company
 {
     public class Plan: BaseEntity
     {
