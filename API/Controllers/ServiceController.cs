@@ -1,16 +1,14 @@
-﻿using Infrastructure.Data;
-using Core.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Core.Interfaces;
-using Core.Specifications;
-using API.Dtos;
-using AutoMapper;
-using API.Errors;
-using API.Helpers;
-
+﻿
 namespace API.Controllers
 {
+    using Core.Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Core.Interfaces;
+    using Core.Specifications;
+    using API.Dtos;
+    using AutoMapper;
+    using API.Errors;
+    using API.Helpers;
     public class ServiceController : BaseApiController
     {
         private readonly IGenericRepository<Service> _serviceRepo;
@@ -45,7 +43,6 @@ namespace API.Controllers
             if(service == null) return NotFound(new ApiResponse(404));
             return _mapper.Map<Service, ServiceToReturnDto>(service);
         }
-        //https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18137196#overview
         [HttpGet("GetServicesByCategory/{id}")]
         public async Task<ActionResult<IReadOnlyList<Service>>> GetServicesByCategory(int id)
         {

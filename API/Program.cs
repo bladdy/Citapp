@@ -52,4 +52,6 @@ catch (Exception ex)
 }
 
 app.Run();
-//https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18137658#overview
+//https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18138186#questions
+
+//https://www.udemy.com/course/angular-fernando-herrera/learn/lecture/37519972#overview

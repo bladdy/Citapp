@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text.Json;
 using Core.Entities;
+using Core.Entities.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
@@ -11,6 +12,19 @@ namespace Infrastructure.Data
         {
             try
             {
+                if (!context.Plans.Any())
+                {                    
+                    var plansData = File.ReadAllText("../Infrastructure/Data/SeedData/plans.json");
+                    var plans = JsonSerializer.Deserialize<List<Plan>>(plansData);
+
+                    foreach (var item in plans)
+                    {
+                        context.Plans.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                    
+                }
                 if (!context.Categories.Any())
                 {                    
                     var categoriesData = File.ReadAllText("../Infrastructure/Data/SeedData/category.json");

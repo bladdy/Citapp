@@ -1,5 +1,6 @@
 using System.Reflection;
 using Core.Entities;
+using Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -11,6 +12,9 @@ namespace Infrastructure.Data
         }
         public DbSet<Service> Services { get; set; }
         public DbSet<Category> Categories { get; set; }
+        
+        public DbSet<Plan> Plans { get; set; }
+        public DbSet<Description> Descriptions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

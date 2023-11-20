@@ -4,6 +4,9 @@ namespace Core.Entities.Identity
     {
         //Puedes ponerle que herede de person para completar los datos personales
         public int Id { get; set; }
+        /// <summary>
+        /// Sacarle al user los nombres
+        /// </summary>
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Street { get; set; }

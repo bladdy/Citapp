@@ -23,7 +23,9 @@ namespace Infrastructure.Identity
                         State = "NY",
                         Zipcode = "90210",
                         Country = "United State of America"
-                    }
+                    },
+                    UserType = Core.Enums.UserType.SuperUser
+                    
                 };
 
                 await userManager.CreateAsync(user, "Pa$$w0rd");

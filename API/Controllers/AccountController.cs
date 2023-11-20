@@ -34,14 +34,14 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-           
             var user = await _userManager.FindByEmailFromClaimsPrincipal(User);
 
             return new UserDto
             {
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                UserType = user.UserType.ToString()
             };
         }
         [HttpGet("emailexists")]
@@ -83,7 +83,8 @@ namespace API.Controllers
             {
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
+                DisplayName = user.DisplayName,
+                UserType = user.UserType.ToString()
             };
         }
         [HttpPost("register")]
@@ -99,7 +100,8 @@ namespace API.Controllers
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email
+                UserName = registerDto.Email,
+                UserType = Core.Enums.UserType.Client
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -112,6 +114,13 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user),
                 Email = user.Email
             };
+        }
+        [HttpGet("role")]
+        public async Task<ActionResult<AppUser>> GetCurrentUserRole()
+        {
+            var user = await _userManager.FindByEmailAsync("bob@test.com");
+
+            return user;
         }
 
     }

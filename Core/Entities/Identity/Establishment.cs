@@ -1,6 +1,4 @@
-using Core.Entities.Identity;
-
-namespace Core.Entities
+namespace Core.Entities.Identity
 {
     public class Establishment: BaseEntity
     {
@@ -8,6 +6,9 @@ namespace Core.Entities
         public IReadOnlyList<Phone> Phone { get; set; }
         public IReadOnlyList<Schedule> Schedule { get; set; }
         public Address Address { get; set; }
-        public int AddressId { get; set; }
+        public string PhoneNumber { get; set; }
+        public int PlanID { get; set; }
+        public Plan Plan { get; set; }
+        //public IReadOnlyList<AppUser> AppUsers { get; set; }
     }
 }

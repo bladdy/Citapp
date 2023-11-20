@@ -8,13 +8,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { CommonModule } from '@angular/common';
+import { PricingComponent } from './pricing/pricing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PricingComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

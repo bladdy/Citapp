@@ -1,0 +1,6 @@
+dotnet watch --no-hot-reload //Run la aplicacion
+dotnet ef database update // actualiza la base de datos con las mirgraciones
+dotnet ef migrations add "coment" -o Data/migrations
+
+dotnet ef migrations add UserType -p Infrastructure -s API -c AppIdentityDbContext -o Identity/Migrations
+dotnet ef migrations add UserType -p Infrastructure -s API -c AppointmentContext 

@@ -1,3 +1,5 @@
+using Core.Entities.Identity;
+
 namespace Core.Entities
 {
     public class Schedule: BaseEntity
@@ -8,8 +10,8 @@ namespace Core.Entities
         public int WeekDayId { get; set; }
         public Establishment Establishment { get; set; }
         public int EstablishmentId { get; set; }
-        public Professional Professional { get; set; } 
-        public int ProfessionalId { get; set; }  
+        /*public Professional Professional { get; set; } 
+        public int ProfessionalId { get; set; }  */
         
     }
 }
