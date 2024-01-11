@@ -8,7 +8,5 @@ namespace Core.Entities.Identity
         public string Birthdate { get; set; }
         public string Gender { get; set; }
         public IReadOnlyList<Phone> Phone { get; set; }
-        
-
     }
 }

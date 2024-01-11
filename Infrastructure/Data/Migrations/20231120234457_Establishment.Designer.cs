@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppointmentContext))]
-    [Migration("20231120205408_Establishment")]
+    [Migration("20231120234457_Establishment")]
     partial class Establishment
     {
         /// <inheritdoc />
@@ -111,6 +111,12 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<int>("PlanID")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrlLogo")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

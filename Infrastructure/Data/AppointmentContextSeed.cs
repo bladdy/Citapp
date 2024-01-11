@@ -64,8 +64,8 @@ namespace Infrastructure.Data
                                 Type = "Movil",
                                 NumberPhone = "80965125411",
                             }
-                        }
-                        ,
+                        },
+                        UrlLogo = "Establishment/Papolo.png",
                         Schedule = new List<Schedule>(){
                             new() {
                                 TimeStart = new TimeSpan(8, 00, 00),

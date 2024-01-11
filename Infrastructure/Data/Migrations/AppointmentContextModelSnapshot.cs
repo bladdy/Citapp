@@ -109,6 +109,12 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("PlanID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UrlLogo")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryID");
