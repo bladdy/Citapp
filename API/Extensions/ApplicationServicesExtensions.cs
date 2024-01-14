@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
@@ -54,7 +55,11 @@ namespace API.Extensions
                     .WithOrigins("http://localhost:4200");
                 });
             });
-
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
             return services;
         }
     }

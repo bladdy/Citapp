@@ -1,6 +1,7 @@
 using API.Dtos;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Company;
 using Core.Entities.Identity;
 
 namespace API.Helpers
@@ -16,6 +17,7 @@ namespace API.Helpers
             CreateMap<Category, CategoryToReturnDto>()
             .ForMember(d => d.IconUrl, o=> o.MapFrom<CategoryUrlResolver>());
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<Establishment, EstablishmentsDto>().ReverseMap();
         }
     }
 }

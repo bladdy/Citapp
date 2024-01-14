@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SettingsController: BaseApiController
     {
         private readonly IGenericRepository<Plan> _planRepo;

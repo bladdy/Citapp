@@ -43,13 +43,6 @@ namespace API.Controllers
             if(service == null) return NotFound(new ApiResponse(404));
             return _mapper.Map<Service, ServiceToReturnDto>(service);
         }
-        [HttpGet("GetServicesByCategory/{id}")]
-        public async Task<ActionResult<IReadOnlyList<Service>>> GetServicesByCategory(int id)
-        {
-            var spec = new ServicesWithCategoriesSpecification(id, string.Empty);
-            var service = await _serviceRepo.ListAsync(spec);
-            return  Ok(_mapper.Map<IReadOnlyList<Service>, IReadOnlyList<ServiceToReturnDto>>(service));
-        }
         [HttpGet("GetCategories")]
         public  async Task<ActionResult<IReadOnlyList<CategoryToReturnDto>>> GetCategories()
         {
