@@ -1,57 +1,44 @@
-using API.Extensions;
-using API.Middleware;
-using Core.Entities.Identity;
-using Infrastructure.Data;
-using Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers();
-
-builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddSwaggerDocumentation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseStatusCodePagesWithReExecute("/errors/{0}");
-
-app.UseSwaggerDocumentation();
-
-app.UseStaticFiles();
-app.UseCors("CorsPolicy");
-
-//app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-using var scoped = app.Services.CreateScope();
-var services = scoped.ServiceProvider;
-var context = services.GetRequiredService<AppointmentContext>();
-var identityContext = services.GetRequiredService<AppIdentityDbContext>();
-
-var userManager = services.GetRequiredService<UserManager<AppUser>>();
-
-var logger = services.GetRequiredService<ILogger<Program>>();
-try
+if (app.Environment.IsDevelopment())
 {
-    await context.Database.MigrateAsync();
-    await identityContext.Database.MigrateAsync();
-    await AppointmentContextSeed.SeedAsync(context);
-    await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
-catch (Exception ex)
+
+app.UseHttpsRedirection();
+
+var summaries = new[]
 {
-    logger.LogError(ex, "An error occured during migration");
-}
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast =  Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast")
+.WithOpenApi();
 
 app.Run();
-//https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/learn/lecture/18138186#questions
 
-//https://www.udemy.com/course/angular-fernando-herrera/learn/lecture/37519972#overview
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
